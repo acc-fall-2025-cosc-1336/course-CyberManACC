@@ -1,18 +1,25 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../src')))
+
 import unittest
+from homework.b_in_proc_out.output import multiply_numbers
 
-'''
-The file at /src/homework/b_in_proc_out/output has 
-the function get_number.
-'''
-from src.homework.b_in_proc_out.output import get_number
+class TestMultiplyNumbers(unittest.TestCase):
+    def test_7x7(self):
+        self.assertEqual(multiply_numbers(7, 7), 49)
 
-class Test_Config(unittest.TestCase):
+    def test_5x5(self):
+        self.assertEqual(multiply_numbers(5, 5), 25)
 
-    def test_get_number_1(self):
-        #test that the function get_number returns 1
-        self.assertEqual(1, get_number(1))
-    
-    def test_get_number_2(self):
-        #test that the function get_number returns 2
-        self.assertEqual(2, get_number(2))
+    def test_zero(self):
+        self.assertEqual(multiply_numbers(0, 5), 0)
+        self.assertEqual(multiply_numbers(5, 0), 0)
 
+    def test_negative(self):
+        self.assertEqual(multiply_numbers(-2, 3), -6)
+        self.assertEqual(multiply_numbers(2, -3), -6)
+        self.assertEqual(multiply_numbers(-2, -3), 6)
+
+if __name__ == "__main__":
+    unittest.main()

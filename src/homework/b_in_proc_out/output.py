@@ -1,7 +1,2 @@
-from typing import Union
-
-Number = Union[int, float]
-
-
-def multiply_numbers(a: Number, b: Number) -> Number:
+def multiply_numbers(a, b):
     return a * b
