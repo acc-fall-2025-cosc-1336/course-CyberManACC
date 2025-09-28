@@ -44,3 +44,26 @@ def get_letter_grade_switch(numerical_grade: Numeric) -> str:
 
 # Alias for graders expecting this exact name
 get_letter_grade = get_letter_grade_if
+
+def get_options_ratio(option, total):
+    return float(option) / float(total)
+
+
+def get_faculty_rating(ratio):
+    # Table from the prompt:
+    # - Greater than equal to .9 but less than 1  -> Excellent
+    # - Greater than .8                            -> Very Good
+    # - Greater than .7                            -> Good
+    # - Greater than .6                            -> Needs Improvement
+    # - 0 to .59                                   -> Unacceptable
+    if ratio >= 0.9 and ratio < 1:
+        return "Excellent"
+    elif ratio > 0.8:
+        return "Very Good"
+    elif ratio > 0.7:
+        return "Good"
+    elif ratio > 0.6:
+        return "Needs Improvement"
+    else:
+        return "Unacceptable"
+
