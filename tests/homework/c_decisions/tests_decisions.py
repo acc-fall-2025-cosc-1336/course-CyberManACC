@@ -9,7 +9,7 @@ DECISIONS_DIR = os.path.join(REPO_ROOT, "src", "homework", "c_decisions")
 if DECISIONS_DIR not in sys.path:
     sys.path.insert(0, DECISIONS_DIR)
 
-from decisions import get_options_ratio, get_faculty_rating
+from decisions import get_options_ratio, get_faculty_rating  # Ensure 'decisions.py' exists in DECISIONS_DIR
 
 
 
