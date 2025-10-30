@@ -1,6 +1,5 @@
 import unittest
+from tests.homework.h_strings import tests_strings
 
-from tests.homework.e_functions import tests_functions
-
-suite = unittest.TestLoader().loadTestsFromModule(tests_functions)
+suite = unittest.TestLoader().loadTestsFromModule(tests_strings)
 unittest.TextTestRunner(verbosity=2).run(suite)
