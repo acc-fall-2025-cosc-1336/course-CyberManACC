@@ -1,4 +1,3 @@
-# Allow running this file directly: python src/homework/h_strings/main.py
 import os
 import sys
 
