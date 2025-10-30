@@ -1,4 +1,3 @@
-# Allow running this file directly: python tests/homework/h_strings/tests_strings.py
 import os, sys
 _here = os.path.abspath(os.path.dirname(__file__))
 _root = os.path.abspath(os.path.join(_here, "..", "..", ".."))

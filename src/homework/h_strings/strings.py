@@ -27,7 +27,6 @@ def get_dna_complement(dna: str) -> str:
             comp = 'C'
         else:
             raise ValueError(f"Invalid DNA symbol: {ch}")
-        # Prepend to reverse without slicing
         rev_comp = comp + rev_comp
         i += 1
     return rev_comp
