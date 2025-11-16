@@ -1,62 +1,50 @@
 import os, sys
-if __package__ is None or __package__ == "":
+if __package__ in (None, ""):
     _here = os.path.abspath(os.path.dirname(__file__))
     _root = os.path.abspath(os.path.join(_here, "..", "..", ".."))
     if _root not in sys.path:
         sys.path.insert(0, _root)
 
-from src.homework.g_lists_and_tuples.lists import (
-    get_lowest_list_value,
-    get_highest_list_value,
-)
+from src.homework.g_lists_and_tuples.lists import get_p_distance_matrix
 
-def menu():
-    print("\n1-Show the list low/high values")
-    print("2-Exit")
-
-def read_int(prompt):
+def read_sequences() -> list[list[str]]:
+    print("Enter DNA strings (one per line). Press ENTER on an empty line to finish.")
+    seqs: list[list[str]] = []
     while True:
-        raw = input(prompt).strip()
-        try:
-            return int(raw)
-        except ValueError:
-            print("Invalid number. Please enter an integer.")
-
-def collect_values():
-    values = []
-    # Always collect at least 3 values
-    while len(values) < 3:
-        values.append(read_int("Enter a list value: "))
-
-    # After at least 3 values, ask whether to continue
-    while True:
-        choice = input("Do you want to enter another value? (y/n): ").strip().lower()
-        if choice == "y":
-            values.append(read_int("Enter a list value: "))
-        elif choice == "n":
+        s = input().strip().upper()
+        if not s:
             break
-        else:
-            print("Please enter 'y' or 'n'.")
-    return values
+        seqs.append(list(s))
+    if not seqs:
+        return []
 
-def main():
+    # validate equal length
+    L = len(seqs[0])
+    if any(len(x) != L for x in seqs):
+        raise ValueError("All sequences must be the same length.")
+    return seqs
+
+def print_matrix(mat: list[list[float]]) -> None:
+    for row in mat:
+        print(" ".join(f"{x:.5f}" for x in row))
+
+def main() -> None:
     while True:
-        menu()
-        choice = input("Enter choice: ").strip()
+        print("\n1-Get p distance matrix")
+        print("2-Exit")
+        choice = input("Choose an option: ").strip()
         if choice == "1":
-            values = collect_values()
-            try:
-                low = get_lowest_list_value(values)
-                high = get_highest_list_value(values)
-                print(f"Lowest value: {low}")
-                print(f"Highest value: {high}")
-            except ValueError as e:
-                print(f"Error: {e}")
+            seqs = read_sequences()
+            if not seqs:
+                print("No sequences provided.")
+                continue
+            matrix = get_p_distance_matrix(seqs)
+            print("\nResult:")
+            print_matrix(matrix)
         elif choice == "2":
-            print("Goodbye.")
             break
         else:
-            print("Invalid selection. Try again.")
+            print("Invalid option, please try again.")
 
 if __name__ == "__main__":
     main()
